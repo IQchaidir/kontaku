@@ -142,6 +142,10 @@ const filterContactByLabel = (id) => {
     const filteredContacts = contacts.filter((contact) => {
         return contact.label === id
     })
+
+    if (filteredContacts.length === 0) {
+        return "Contact not found"
+    }
     return filteredContacts
 }
 
