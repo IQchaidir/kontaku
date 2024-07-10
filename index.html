@@ -3,9 +3,69 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="dist/style.css" />
         <title>Kontaku</title>
     </head>
-    <body></body>
+    <body>
+        <div class="flex bg-indigo-500 p-7 gap-5">
+            <nav class="bg-white rounded-md w-1/6 p-5">
+                <button class="bg-indigo-500 rounded-md w-full p-2 text-white text-lg font-semibold">
+                    Add New Contact
+                </button>
+                <hr class="mt-5" />
+                <ul class="">
+                    <li class="mt-3 w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">
+                        All Contacts
+                    </li>
+                    <li class="mt-3 w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Favorites</li>
+                </ul>
+                <hr class="mt-5" />
+                <h3 class="mt-5">Labels</h3>
+                <ul>
+                    <li class="mt-3 w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Work</li>
+                    <li class="mt-3 w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Friend</li>
+                    <li class="mt-3 w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Family</li>
+                </ul>
+            </nav>
+            <div class="flex flex-col w-5/6 gap-3">
+                <header class="flex flex-col gap-2">
+                    <p class="text-5xl text-white font-semibold text">KONTAKU</p>
+                    <div class="flex justify-between">
+                        <p class="text-3xl text-white font-semibold">List Contact</p>
+                        <input type="text" placeholder="Search Contact" class="w-60 h-8 rounded-sm" />
+                    </div>
+                </header>
+                <main class="bg-white rounded-md min-h-[575px]">
+                    <section id="list-contact" class="px-5 py-2">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left">
+                                    <th class="py-2 px-4 border-b">Name</th>
+                                    <th class="py-2 px-4 border-b">Email</th>
+                                    <th class="py-2 px-4 border-b">Phone Number</th>
+                                    <th class="py-2 px-4 border-b">Labels</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cursor-pointer hover:bg-indigo-200">
+                                    <td class="py-2 px-4">John Doe</td>
+                                    <td class="py-2 px-4">john.doe@example.com</td>
+                                    <td class="py-2 px-4">08772039233</td>
+                                    <td class="py-2 px-4">Family</td>
+                                </tr>
+                                <tr class="cursor-pointer hover:bg-indigo-200">
+                                    <td class="py-2 px-4">Jane Smith</td>
+                                    <td class="py-2 px-4">jane.smith@example.com</td>
+                                    <td class="py-2 px-4">08772039233</td>
+                                    <td class="py-2 px-4">Friend</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
     <script src="/storage.js"></script>
     <script src="/index.js"></script>
 </html>
