@@ -137,6 +137,14 @@ const deleteLabel = (id) => {
     renderContacts()
 }
 
+const filterContactByLabel = (id) => {
+    const contacts = loadContact()
+    const filteredContacts = contacts.filter((contact) => {
+        return contact.label === id
+    })
+    return filteredContacts
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     let contactsToSave = contacts
     let labelsToSave = labels
