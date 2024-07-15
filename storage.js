@@ -1,11 +1,21 @@
-const labels = [{ id: 1, name: "Family" }]
+const labels = [
+    { id: 1, name: "Family" },
+    { id: 2, name: "Friend" },
+]
 
 const contacts = [
     {
         id: 1,
         label: 1,
-        fullName: "Iqbal",
+        fullName: "Iqbal Chaidir",
         email: "iqbal@gmail.com",
+        phone: "087811111111",
+    },
+    {
+        id: 2,
+        label: 2,
+        fullName: "Alex Darwis",
+        email: "Alex@gmail.com",
         phone: "087811111111",
     },
 ]
