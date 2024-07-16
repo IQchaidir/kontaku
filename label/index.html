@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/dist/style.css" />
+        <title>LABEL</title>
+    </head>
+    <body>
+        <div class="flex bg-indigo-500 h-screen p-7 gap-5">
+            <nav class="bg-white rounded-md w-1/6 p-5 font-semibold hidden md:flex md:flex-col">
+                <button class="bg-indigo-500 rounded-md w-full p-2 text-white text-lg font-semibold">
+                    <a href="/create-contact/">Add New Contact</a>
+                </button>
+                <hr class="mt-5" />
+                <ul class="space-y-2 mt-5">
+                    <a href="/">
+                        <li id="allContacts" class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">
+                            All Contacts
+                        </li>
+                    </a>
+                    <li class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Favorites</li>
+                </ul>
+                <hr class="mt-5" />
+                <div class="mt-2 p-2 flex justify-between items-center">
+                    <span>Labels</span
+                    ><svg
+                        fill="#000000"
+                        version="1.1"
+                        id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 45.402 45.402"
+                        xml:space="preserve"
+                        width="30"
+                        height="30"
+                        class="cursor-pointer hover:bg-indigo-200 p-2 rounded-full hover:scale-125"
+                    >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path
+                                    d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"
+                                ></path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <ul id="label-container" class="space-y-2"></ul>
+            </nav>
+            <div class="flex flex-col w-full md:w-5/6 gap-3">
+                <header class="flex flex-col gap-2">
+                    <p class="text-5xl text-white font-semibold text">KONTAKU</p>
+                    <div class="flex justify-between">
+                        <p class="text-3xl text-white font-semibold">Label</p>
+                        <input
+                            id="searchContact"
+                            type="search"
+                            name="search"
+                            placeholder="Search Contact"
+                            class="w-60 h-8 rounded-sm px-2"
+                        />
+                    </div>
+                </header>
+                <main class="bg-white rounded-md h-full overflow-y-auto">
+                    <section class="px-5 py-2">
+                        <div class="border-b text-sm font-bold p-2 grid grid-cols-6 gap-5">
+                            <div>NAME</div>
+                            <div>EMAIL</div>
+                            <div>PHONE NUMBER</div>
+                            <div>LABEL</div>
+                            <div>COMPANY & JOB TITLE</div>
+                        </div>
+                        <div id="contact-container" class="mt-2 flex flex-col gap-3"></div>
+                    </section>
+
+                    <!-- Komponen Desk -->
+                    <div
+                        id="deskComponent"
+                        class="hidden bg-white fixed top-0 right-0 h-full w-30 shadow-2xl transition-transform duration-300 transform translate-x-full"
+                    >
+                        <div class="p-4">
+                            <!-- Konten di dalam desk -->
+                        </div>
+                    </div>
+
+                    <!--delete modal contact Component -->
+                    <div
+                        id="deleteModalContact"
+                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                    >
+                        <div class="bg-white p-6 rounded shadow-lg text-center">
+                            <p class="mb-4">Are you sure you want to delete this contact?</p>
+                            <div class="flex justify-end">
+                                <button
+                                    id="confirmDelete"
+                                    class="bg-indigo-500 text-white px-4 py-2 rounded mr-2"
+                                    onclick="confirmDeleteContact(true)"
+                                >
+                                    Yes
+                                </button>
+                                <button
+                                    id="cancelDelete"
+                                    onclick="confirmDeleteContact()"
+                                    class="bg-gray-300 text-black px-4 py-2 rounded"
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Create Label modal  Component -->
+                    <div
+                        id="createLabelModal"
+                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                    >
+                        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                            <h2 class="text-xl font-semibold mb-4">Create New Label</h2>
+                            <form id="createLabelForm" class="space-y-4" method="post">
+                                <div>
+                                    <label for="labelName" class="block text-sm font-medium text-gray-700"
+                                        >Label Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="labelName"
+                                        name="labelName"
+                                        required
+                                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    />
+                                </div>
+                                <div class="flex justify-end">
+                                    <button
+                                        type="button"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md mr-2"
+                                        onclick="showCreateLabelModal()"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md"
+                                    >
+                                        Create Label
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--delete modal Label Component -->
+                    <div
+                        id="deleteModalLabel"
+                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                    >
+                        <div class="bg-white p-6 rounded shadow-lg text-center">
+                            <p class="mb-4">Are you sure you want to delete this label?</p>
+                            <div class="flex justify-end">
+                                <button
+                                    id="confirmDelete"
+                                    class="bg-indigo-500 text-white px-4 py-2 rounded mr-2"
+                                    onclick="confirmDeleteLabel(true)"
+                                >
+                                    Yes
+                                </button>
+                                <button
+                                    id="cancelDelete"
+                                    onclick="confirmDeleteLabel()"
+                                    class="bg-gray-300 text-black px-4 py-2 rounded"
+                                >
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+    <script src="/storage.js"></script>
+    <script src="/label/index.js"></script>
+</html>
