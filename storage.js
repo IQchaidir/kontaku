@@ -10,6 +10,8 @@ const contacts = [
         fullName: "Iqbal Chaidir",
         email: "iqbal@gmail.com",
         phone: "087811111111",
+        company: "Google",
+        jobTitle: "Senior Dev",
     },
     {
         id: 2,
@@ -17,6 +19,8 @@ const contacts = [
         fullName: "Alex Darwis",
         email: "Alex@gmail.com",
         phone: "087811111111",
+        company: "Facebook",
+        jobTitle: "Junior Dev",
     },
 ]
 
@@ -24,7 +28,7 @@ const saveContact = (contacts) => {
     localStorage.setItem("contacts", JSON.stringify(contacts))
 }
 
-const loadContact = () => {
+const loadContacts = () => {
     const contacts = localStorage.getItem("contacts")
     if (!contacts) {
         saveContact([])

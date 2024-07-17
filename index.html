@@ -6,335 +6,152 @@
         <link rel="stylesheet" href="dist/style.css" />
         <title>KONTAKU</title>
     </head>
-    <body>
-        <div class="flex bg-indigo-500 h-screen p-7 gap-5">
-            <nav class="bg-white rounded-md w-1/6 p-5 font-semibold hidden md:flex md:flex-col">
-                <button
-                    class="bg-indigo-500 rounded-md w-full p-2 text-white text-lg font-semibold"
-                    onclick="showAddContactModal()"
+    <body class="flex bg-indigo-500 h-screen p-7 gap-5">
+        <nav class="bg-white rounded-md w-1/6 p-5 font-semibold hidden md:flex md:flex-col">
+            <button
+                class="bg-indigo-500 rounded-md w-full p-2 text-white text-lg font-semibold"
+                onclick="showAddContactModal()"
+            >
+                Add New Contact
+            </button>
+            <hr class="mt-5" />
+            <ul class="space-y-2 mt-5">
+                <a href="/">
+                    <li id="allContacts" class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">
+                        All Contacts
+                    </li>
+                </a>
+                <li class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Favorites</li>
+            </ul>
+            <hr class="mt-5" />
+            <div class="mt-2 p-2 flex justify-between items-center">
+                <span>Labels</span
+                ><svg
+                    fill="#000000"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 45.402 45.402"
+                    xml:space="preserve"
+                    width="30"
+                    height="30"
+                    class="cursor-pointer hover:bg-indigo-200 p-2 rounded-full hover:scale-125"
+                    onclick="showCreateLabelModal()"
                 >
-                    Add New Contact
-                </button>
-                <hr class="mt-5" />
-                <ul class="space-y-2 mt-5">
-                    <a href="/">
-                        <li id="allContacts" class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">
-                            All Contacts
-                        </li>
-                    </a>
-                    <li class="w-full cursor-pointer rounded-md hover:bg-indigo-200 p-2">Favorites</li>
-                </ul>
-                <hr class="mt-5" />
-                <div class="mt-2 p-2 flex justify-between items-center">
-                    <span>Labels</span
-                    ><svg
-                        fill="#000000"
-                        version="1.1"
-                        id="Capa_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 45.402 45.402"
-                        xml:space="preserve"
-                        width="30"
-                        height="30"
-                        class="cursor-pointer hover:bg-indigo-200 p-2 rounded-full hover:scale-125"
-                        onclick="showCreateLabelModal()"
-                    >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <g>
-                                <path
-                                    d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"
-                                ></path>
-                            </g>
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g>
+                            <path
+                                d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141 c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27 c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435 c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"
+                            ></path>
                         </g>
-                    </svg>
-                </div>
-                <ul id="label-container" class="space-y-2"></ul>
-            </nav>
-            <div class="flex flex-col w-full md:w-5/6 gap-3">
-                <header class="flex flex-col gap-2">
-                    <p class="text-5xl text-white font-semibold text">KONTAKU</p>
-                    <div class="flex justify-between">
-                        <p class="text-3xl text-white font-semibold">List Contact</p>
-                        <form method="get">
-                            <input
-                                type="search"
-                                name="search"
-                                placeholder="Search Contact"
-                                class="w-60 h-8 rounded-sm px-2"
-                            />
-                        </form>
-                    </div>
-                </header>
-                <main class="bg-white rounded-md h-full overflow-y-auto">
-                    <section class="px-5 py-2">
-                        <div class="border-b text-sm font-bold p-2 grid grid-cols-6 gap-5">
-                            <div>NAME</div>
-                            <div>EMAIL</div>
-                            <div>PHONE NUMBER</div>
-                            <div>LABEL</div>
-                            <div>COMPANY & JOB TITLE</div>
-                        </div>
-                        <div id="contact-container" class="mt-2 flex flex-col gap-3"></div>
-                    </section>
-
-                    <!-- Add Contact Form Modal -->
-                    <div
-                        id="addContactModal"
-                        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden justify-center items-center"
-                    >
-                        <div class="bg-white p-6 rounded-lg w-1/2">
-                            <div class="text-2xl font-bold mb-7 flex justify-between">
-                                <span>Add New Contact</span
-                                ><span class="cursor-pointer" onclick="showAddContactModal()">X</span>
-                            </div>
-                            <form id="add-contact-form" class="space-y-5" method="post">
-                                <div class="flex gap-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    >
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                    </svg>
-                                    <input
-                                        id="full-name"
-                                        name="fullName"
-                                        type="text"
-                                        placeholder="Full Name"
-                                        class="border border-black px-1 w-full rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div class="flex gap-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 64 64"
-                                        id="email"
-                                    >
-                                        <path
-                                            fill="#222"
-                                            d="M53.42 53.32H10.58a8.51 8.51 0 0 1-8.5-8.5V19.18a8.51 8.51 0 0 1 8.5-8.5h42.84a8.51 8.51 0 0 1 8.5 8.5v25.64a8.51 8.51 0 0 1-8.5 8.5ZM10.58 13.68a5.5 5.5 0 0 0-5.5 5.5v25.64a5.5 5.5 0 0 0 5.5 5.5h42.84a5.5 5.5 0 0 0 5.5-5.5V19.18a5.5 5.5 0 0 0-5.5-5.5Z"
-                                        ></path>
-                                        <path
-                                            fill="#222"
-                                            d="M32 38.08a8.51 8.51 0 0 1-5.13-1.71L3.52 18.71a1.5 1.5 0 1 1 1.81-2.39L28.68 34a5.55 5.55 0 0 0 6.64 0l23.35-17.68a1.5 1.5 0 1 1 1.81 2.39L37.13 36.37A8.51 8.51 0 0 1 32 38.08Z"
-                                        ></path>
-                                        <path
-                                            fill="#222"
-                                            d="M4.17 49.14a1.5 1.5 0 0 1-1-2.62l18.4-16.41a1.5 1.5 0 0 1 2 2.24L5.17 48.76a1.46 1.46 0 0 1-1 .38zm55.66 0a1.46 1.46 0 0 1-1-.38l-18.4-16.41a1.5 1.5 0 1 1 2-2.24l18.39 16.41a1.5 1.5 0 0 1-1 2.62z"
-                                        ></path>
-                                    </svg>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        placeholder="Email"
-                                        class="border border-black px-1 w-full rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div class="flex gap-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 32 32"
-                                        id="phone"
-                                    >
-                                        <path
-                                            d="M27.308,20.649l-2.2-2.2a3.521,3.521,0,0,0-4.938-.021,2.152,2.152,0,0,1-2.729.267A15.026,15.026,0,0,1,13.3,14.562a2.181,2.181,0,0,1,.284-2.739A3.521,3.521,0,0,0,13.553,6.9l-2.2-2.2a3.514,3.514,0,0,0-4.961,0l-.633.634c-3.3,3.3-3.053,10.238,3.813,17.1,4.14,4.141,8.307,5.875,11.686,5.875a7.5,7.5,0,0,0,5.418-2.061l.634-.634A3.513,3.513,0,0,0,27.308,20.649ZM25.894,24.2l-.634.634c-2.6,2.6-8.339,2.125-14.276-3.813S4.571,9.34,7.171,6.74L7.8,6.107a1.511,1.511,0,0,1,2.133,0l2.2,2.2a1.511,1.511,0,0,1,.021,2.11,4.181,4.181,0,0,0-.531,5.239,17.01,17.01,0,0,0,4.713,4.706,4.179,4.179,0,0,0,5.231-.517,1.512,1.512,0,0,1,2.118.013l2.2,2.2A1.51,1.51,0,0,1,25.894,24.2Z"
-                                        ></path>
-                                    </svg>
-                                    <input
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        type="tel"
-                                        placeholder="Phone Number"
-                                        class="border border-black px-1 w-full rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div class="flex gap-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 3591.149 3075.098"
-                                        id="building"
-                                    >
-                                        <path
-                                            fill="#282d35"
-                                            d="M282.768 1138.14h212.076v205.007H282.768zM622.089 1138.14h205.007v205.007H622.089zM282.768 1463.323h205.007v212.076H282.768zM622.089 1463.323h212.076v212.076H622.089zM282.768 1802.644h205.007v205.007H282.768zM622.089 1802.644h212.076v205.007H622.089zM282.768 2120.757h205.007v212.076H282.768zM622.089 2120.757h212.076v212.076H622.089zM282.768 2460.079h205.007v205.007H282.768zM622.089 2460.079h212.076v205.007H622.089z"
-                                        ></path>
-                                        <path
-                                            fill="#282d35"
-                                            d="M3591.149 812.957h-982.617V0H982.618v812.957H0v2262.141h3591.149V812.957zM982.618 2947.853H120.176V940.203h862.441v2007.65zm1067.447 7.069h-508.982v-742.265h508.982v742.265zm-629.158-869.511v869.51h-311.044V120.176h1371.423l-7.069 2834.746h-296.906v-869.51h-756.404zm2042.997 862.442h-855.372V940.203h855.372v2007.65z"
-                                        ></path>
-                                        <path
-                                            fill="#282d35"
-                                            d="M2764.054 1138.14h205.007v205.007h-205.007zM3096.306 1138.14h212.076v205.007h-212.076zM2756.984 1463.323h212.076v212.076h-212.076zM3103.375 1463.323h205.007v212.076h-205.007zM2756.984 1802.644h212.076v205.007h-212.076zM3103.375 1802.644h205.007v205.007h-205.007zM2756.984 2120.757h212.076v212.076h-212.076zM3103.375 2120.757h205.007v212.076h-205.007zM2756.984 2460.079h212.076v205.007h-212.076zM3103.375 2460.079h205.007v205.007h-205.007zM1272.454 996.756h212.076v205.007h-212.076zM2092.48 996.756h212.076v205.007H2092.48zM1272.454 1321.939h212.076v212.076h-212.076zM2099.55 1321.939h205.007v212.076H2099.55zM1272.454 1661.26h212.076v205.007h-212.076zM2099.55 1661.26h205.007v205.007H2099.55zM1682.467 989.687h212.076v212.076h-212.076zM1272.454 664.504h212.076v205.007h-212.076zM2092.48 664.504h212.076v205.007H2092.48zM1682.467 664.504h212.076v205.007h-212.076zM1272.454 332.252h212.076v205.007h-212.076zM2092.48 332.252h212.076v205.007H2092.48zM1682.467 332.252h212.076v205.007h-212.076zM1682.467 1321.939h212.076v205.007h-212.076zM1682.467 1654.191h212.076v212.076h-212.076z"
-                                        ></path>
-                                    </svg>
-                                    <div class="w-full space-y-5">
-                                        <input
-                                            id="company"
-                                            name="company"
-                                            type="text"
-                                            placeholder="Company"
-                                            class="border border-black px-1 w-full rounded-md h-10"
-                                            required
-                                        />
-                                        <input
-                                            id="jobTitle"
-                                            name="jobTitle"
-                                            type="text"
-                                            placeholder="Job Title"
-                                            class="border border-black px-1 w-full rounded-md h-10"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <div class="flex gap-5">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="40"
-                                        height="40"
-                                        viewBox="0 0 50 50"
-                                        id="logoLabel"
-                                    >
-                                        <path
-                                            d="M24.896 9.463a.997.997 0 0 0-.707-.293l-12.957-.001a1 1 0 0 0-1 .996l-.046 13.005a.998.998 0 0 0 .293.711l16.995 16.995a.997.997 0 0 0 1.414 0l13.004-13.004a.999.999 0 0 0 0-1.414L24.896 9.463zm3.285 29.292L12.188 22.761l.041-11.592 11.547.001 15.995 15.995-11.59 11.59z"
-                                        ></path>
-                                        <circle cx="20.362" cy="19.346" r="2.61"></circle>
-                                    </svg>
-                                    <select
-                                        id="label"
-                                        name="label"
-                                        placeholder="Select Label"
-                                        class="border border-black px-1 w-full rounded-md"
-                                    ></select>
-                                </div>
-                                <div class="pl-14">
-                                    <button
-                                        type="submit"
-                                        class="w-full bg-indigo-500 rounded-md py-2 text-white font-bold"
-                                    >
-                                        Add Contact
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- Detail contact Desk -->
-                    <div
-                        id="deskComponent"
-                        class="hidden bg-white fixed top-0 right-0 h-full w-30 shadow-2xl transition-transform duration-300 transform translate-x-full"
-                    ></div>
-
-                    <!--Delete contact modal -->
-                    <div
-                        id="deleteModalContact"
-                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
-                    >
-                        <div class="bg-white p-6 rounded shadow-lg text-center">
-                            <p class="mb-4">Are you sure you want to delete this contact?</p>
-                            <div class="flex justify-end">
-                                <button
-                                    id="confirmDelete"
-                                    class="bg-indigo-500 text-white px-4 py-2 rounded mr-2"
-                                    onclick="confirmDeleteContact(true)"
-                                >
-                                    Yes
-                                </button>
-                                <button
-                                    id="cancelDelete"
-                                    onclick="confirmDeleteContact()"
-                                    class="bg-gray-300 text-black px-4 py-2 rounded"
-                                >
-                                    No
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Create Label modal -->
-                    <div
-                        id="createLabelModal"
-                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
-                    >
-                        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                            <h2 class="text-xl font-semibold mb-4">Create New Label</h2>
-                            <form id="createLabelForm" class="space-y-4" method="post">
-                                <div>
-                                    <label for="labelName">Label Name</label>
-                                    <input
-                                        type="text"
-                                        id="labelName"
-                                        name="labelName"
-                                        required
-                                        class="w-full border-2 border-black rounded-md p-2"
-                                    />
-                                </div>
-                                <div class="flex justify-end">
-                                    <button
-                                        type="button"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md mr-2"
-                                        onclick="showCreateLabelModal()"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md"
-                                    >
-                                        Create Label
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!--delete modal Label  -->
-                    <div
-                        id="deleteModalLabel"
-                        class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
-                    >
-                        <div class="bg-white p-6 rounded shadow-lg text-center">
-                            <p class="mb-4">Are you sure you want to delete this label?</p>
-                            <div class="flex justify-end">
-                                <button
-                                    id="confirmDelete"
-                                    class="bg-indigo-500 text-white px-4 py-2 rounded mr-2"
-                                    onclick="confirmDeleteLabel(true)"
-                                >
-                                    Yes
-                                </button>
-                                <button
-                                    id="cancelDelete"
-                                    onclick="confirmDeleteLabel()"
-                                    class="bg-gray-300 text-black px-4 py-2 rounded"
-                                >
-                                    No
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+                    </g>
+                </svg>
             </div>
+            <ul id="label-container" class="space-y-2"></ul>
+        </nav>
+        <div class="flex flex-col w-full md:w-5/6 gap-3">
+            <header class="flex flex-col gap-2">
+                <p class="text-5xl text-white font-semibold text">KONTAKU</p>
+                <div class="flex justify-between">
+                    <p class="text-3xl text-white font-semibold">List Contact</p>
+                    <form class="flex items-center bg-gray-300 rounded-sm" method="get">
+                        <input
+                            type="search"
+                            name="search"
+                            placeholder="Search Contact"
+                            class="w-60 h-8 px-2"
+                        />
+                        <button type="submit">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                x="0px"
+                                y="0px"
+                                width="25"
+                                height="25"
+                                viewBox="0 0 50 50"
+                                class="p-1"
+                            >
+                                <path
+                                    d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </header>
+            <main class="bg-white rounded-md h-full overflow-y-auto">
+                <section class="px-5 py-2">
+                    <div class="border-b text-sm font-bold p-2 grid grid-cols-6 gap-5">
+                        <div>NAME</div>
+                        <div>EMAIL</div>
+                        <div>PHONE NUMBER</div>
+                        <div>LABEL</div>
+                        <div>COMPANY & JOB TITLE</div>
+                    </div>
+                    <div id="contact-container" class="mt-2 flex flex-col gap-3"></div>
+                </section>
+
+                <!-- Contact Form Modal -->
+                <div
+                    id="formContactModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden justify-center items-center"
+                >
+                    <!-- Modal Content -->
+                </div>
+
+                <!-- Detail contact Desk -->
+                <div
+                    id="deskComponent"
+                    class="hidden bg-white fixed top-0 right-0 h-full w-30 shadow-2xl"
+                ></div>
+
+                <!--Delete contact modal -->
+                <div
+                    id="deleteModalContact"
+                    class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                >
+                    <div class="bg-white p-6 rounded shadow-lg text-center">
+                        <p class="mb-4">Are you sure you want to delete this contact?</p>
+                        <div class="flex justify-end">
+                            <button
+                                id="confirmDelete"
+                                class="bg-indigo-500 text-white px-4 py-2 rounded mr-2"
+                                onclick="confirmDeleteContact(true)"
+                            >
+                                Yes
+                            </button>
+                            <button
+                                id="cancelDelete"
+                                onclick="confirmDeleteContact()"
+                                class="bg-gray-300 text-black px-4 py-2 rounded"
+                            >
+                                No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Label Form Modal -->
+                <div
+                    id="labelFormModal"
+                    class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                >
+                    <div id="labelFormModalContent" class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                        <!-- Modal Content -->
+                    </div>
+                </div>
+
+                <!-- Delete Label Modal -->
+                <div
+                    id="deleteLabelModal"
+                    class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 hidden"
+                >
+                    <!-- Modal Content -->
+                </div>
+            </main>
         </div>
     </body>
     <script src="/storage.js"></script>
