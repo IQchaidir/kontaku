@@ -14,7 +14,7 @@ This is a simple address book application designed to help users manage their co
 
 ## Preview
 
-![Homepage](/assets/HomePage.png)
+![Homepage](/assets/Homepage.png)
 ![Form Contact](/assets/FormContact.png)
 ![Form Label](/assets/FormLabel.png)
 
