@@ -19,6 +19,10 @@ const renderContacts = () => {
 
     const contactsToRender = keyword ? searchContact(contacts, keyword) : contacts
 
+    if (contactsToRender.length === 0) {
+        contactContainer.innerHTML = '<p class=" text-gray-500">No contacts available</p>'
+        return
+    }
     const contactItems = contactsToRender.map((contact) => {
         const label = labels.find((label) => label.id === contact.label)
         const contactLabel = label ? label.name : ""
@@ -774,6 +778,12 @@ const editLabel = (event, labelId) => {
     const formData = new FormData(event.target)
     const labelName = formData.get("labelName").trim()
 
+    const existingLabel = labels.find((label) => label.name === labelName && label.id !== labelId)
+    if (existingLabel) {
+        showToast("Label already exist!")
+        return
+    }
+
     const editLabel = {
         id: labelId,
         name: labelName,
@@ -902,7 +912,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     saveContact(contactsToSave)
     saveLabel(labelsToSave)
-    // renderOptionLabels()
     renderContacts()
     renderLabels()
 })
