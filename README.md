@@ -12,8 +12,14 @@ This is a simple address book application designed to help users manage their co
 -   **Edit Contacts**: Update contact information.
 -   **Delete Contacts**: Remove unwanted contacts from the application.
 
+## Preview
+
+![Homepage](/assets/HomePage.png)
+![Form Contact](/assets/FormContact.png)
+![Form Label](/assets/FormLabel.png)
+
 ## Technologies
 
 -   HTML5
--   CSS3
+-   Tailwind
 -   JavaScript
